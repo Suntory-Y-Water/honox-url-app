@@ -8,12 +8,21 @@ importers:
 
   .:
     dependencies:
+      '@hono/zod-validator':
+        specifier: ^0.4.3
+        version: 0.4.3(hono@4.7.2)(zod@3.24.2)
       hono:
         specifier: ^4.7.2
         version: 4.7.2
       honox:
         specifier: ^0.1.38
         version: 0.1.38(hono@4.7.2)(miniflare@3.20250214.1)(wrangler@3.111.0(@cloudflare/workers-types@4.20250224.0))
+      nanoid:
+        specifier: ^5.1.2
+        version: 5.1.2
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
@@ -518,6 +527,12 @@ packages:
         optional: true
       wrangler:
         optional: true
+
+  '@hono/zod-validator@0.4.3':
+    resolution: {integrity: sha512-xIgMYXDyJ4Hj6ekm9T9Y27s080Nl9NXHcJkOvkXPhubOLj8hZkOL8pDnnXfvCf5xEE8Q4oMFenQUZZREUY2gqQ==}
+    peerDependencies:
+      hono: '>=3.9.0'
+      zod: ^3.19.1
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -1284,6 +1299,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@5.1.2:
+    resolution: {integrity: sha512-b+CiXQCNMUGe0Ri64S9SXFcP9hogjAJ2Rd6GdVxhPLRm7mhGaM7VgOvCAJ1ZshfHbqVDI3uqTI5C8/GaKuLI7g==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+
   node-source-walk@7.0.1:
     resolution: {integrity: sha512-3VW/8JpPqPvnJvseXowjZcirPisssnBuDikk6JIZ8jQzF7KJQX52iPFX4RYYxLycYH7IbMRSPUOga/esVjy5Yg==}
     engines: {node: '>=18'}
@@ -1512,6 +1532,9 @@ packages:
 
   zod@3.22.3:
     resolution: {integrity: sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==}
+
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
 snapshots:
 
@@ -1817,6 +1840,11 @@ snapshots:
     optionalDependencies:
       miniflare: 3.20250214.1
       wrangler: 3.111.0(@cloudflare/workers-types@4.20250224.0)
+
+  '@hono/zod-validator@0.4.3(hono@4.7.2)(zod@3.24.2)':
+    dependencies:
+      hono: 4.7.2
+      zod: 3.24.2
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
@@ -2538,6 +2566,8 @@ snapshots:
 
   nanoid@3.3.8: {}
 
+  nanoid@5.1.2: {}
+
   node-source-walk@7.0.1:
     dependencies:
       '@babel/parser': 7.26.9
@@ -2778,3 +2808,5 @@ snapshots:
       stacktracey: 2.1.8
 
   zod@3.22.3: {}
+
+  zod@3.24.2: {}

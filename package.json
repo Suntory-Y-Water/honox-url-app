@@ -9,8 +9,11 @@
   },
   "private": true,
   "dependencies": {
+    "@hono/zod-validator": "^0.4.3",
     "hono": "^4.7.2",
-    "honox": "^0.1.38"
+    "honox": "^0.1.38",
+    "nanoid": "^5.1.2",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

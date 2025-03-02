@@ -1,16 +1,27 @@
 import { createRoute } from 'honox/factory';
-import Counter from '../islands/counter';
-import Input from '../islands/input';
+import UrlForm from '../islands/url-form';
 
 export default createRoute((c) => {
-  const name = c.req.query('name') ?? 'Hono';
   return c.render(
-    <div class='py-8 text-center'>
-      <title>{name}</title>
-      <h1 class='text-3xl font-bold'>Hello, {name}!</h1>
-      <Counter />
-      <Counter />
-      <Input />
+    <div className='max-w-2xl mx-auto py-8'>
+      <div className='text-center mb-8'>
+        <h2 className='text-3xl font-bold mb-2'>URLを短縮する</h2>
+        <p className='text-gray-600'>長いURLを入力して、共有しやすい短いURLを生成しましょう。</p>
+      </div>
+
+      <div className='bg-white p-6 rounded-lg shadow-md'>
+        <UrlForm />
+      </div>
+
+      <div className='mt-8 bg-blue-50 p-6 rounded-lg border border-blue-200'>
+        <h3 className='text-xl font-semibold mb-3'>使い方</h3>
+        <ol className='list-decimal pl-5 space-y-2'>
+          <li>上のフォームに短縮したいURLを入力します</li>
+          <li>「短縮URL生成」ボタンをクリックするか、Enterキーを押します</li>
+          <li>生成された短縮URLをコピーして使用します</li>
+          <li>短縮URLにアクセスすると、元のURLにリダイレクトされます</li>
+        </ol>
+      </div>
     </div>,
   );
 });
