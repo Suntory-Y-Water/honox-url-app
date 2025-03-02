@@ -1,12 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "honox-url-app",
-  "main": "./dist/index.js",
   "compatibility_date": "2025-02-28",
   "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "directory": "./dist"
-  },
+  "pages_build_output_dir": "./dist",
   "kv_namespaces": [
     {
       "binding": "URL_STORE",
