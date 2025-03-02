@@ -1,5 +1,5 @@
 {
-  "name": "basic",
+  "name": "honox-url-app",
   "type": "module",
   "scripts": {
     "dev": "vite",
