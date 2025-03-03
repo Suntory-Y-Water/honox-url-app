@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "honox-url-app",
+  "name": "u-shorten",
   "compatibility_date": "2025-02-28",
   "compatibility_flags": ["nodejs_compat"],
   "pages_build_output_dir": "./dist",

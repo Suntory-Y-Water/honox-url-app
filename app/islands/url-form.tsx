@@ -1,49 +1,25 @@
 import { useState } from 'hono/jsx';
 
+type Props = {
+  params: {
+    initialUrl?: string;
+    initialError?: string;
+    initialShortUrl?: string;
+  };
+};
+
 // URL短縮フォームのコンポーネント
-export default function UrlForm() {
-  const [url, setUrl] = useState('');
-  const [shortUrl, setShortUrl] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+export default function UrlForm({ params }: Props) {
+  const { initialUrl = '', initialError = '', initialShortUrl = '' } = params;
+  const [url, setUrl] = useState(initialUrl);
+  const [error] = useState(initialError);
+  const [shortUrl] = useState(initialShortUrl);
   const [copied, setCopied] = useState(false);
 
-  // URLを短縮する関数
-  const shortenUrl = async (e: Event) => {
-    e.preventDefault();
-    setError('');
-    setShortUrl('');
-    setCopied(false);
-
-    if (!url.trim()) {
-      setError('URLを入力してください');
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      const response = await fetch('/api/shorten', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ originalUrl: url.trim() }),
-      });
-
-      if (!response.ok) {
-        const errorData = (await response.json()) as { message?: string };
-        throw new Error(errorData.message || '短縮URLの生成に失敗しました');
-      }
-
-      const data = (await response.json()) as { shortId: string };
-      const origin = window.location.origin;
-      setShortUrl(`${origin}/${data.shortId}`);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : '短縮URLの生成に失敗しました');
-    } finally {
-      setIsLoading(false);
-    }
+  // 入力フィールド変更ハンドラー
+  const handleInputChange = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    setUrl(target.value);
   };
 
   // クリップボードにコピーする関数
@@ -56,14 +32,7 @@ export default function UrlForm() {
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.warn(err);
-      setError('クリップボードへのコピーに失敗しました');
     }
-  };
-
-  // 入力フィールド変更ハンドラー
-  const handleInputChange = (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    setUrl(target.value);
   };
 
   // 選択ハンドラー
@@ -74,14 +43,15 @@ export default function UrlForm() {
 
   return (
     <div className='w-full max-w-md mx-auto'>
-      <form onSubmit={shortenUrl} className='mb-6'>
+      <form action='/api/shorten' method='post' className='mb-6'>
         <div className='mb-4'>
-          <label htmlFor='url' className='block text-sm font-medium text-gray-700 mb-1'>
+          <label htmlFor='originalUrl' className='block text-sm font-medium text-gray-700 mb-1'>
             短縮したいURL
           </label>
           <input
             type='url'
-            id='url'
+            id='originalUrl'
+            name='originalUrl'
             value={url}
             onChange={handleInputChange}
             placeholder='https://example.com/long/url'
@@ -91,12 +61,9 @@ export default function UrlForm() {
         </div>
         <button
           type='submit'
-          disabled={isLoading}
-          className={`w-full px-4 py-2 text-white font-medium rounded-md ${
-            isLoading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-          }`}
+          className='w-full px-4 py-2 text-white font-medium rounded-md bg-blue-600 hover:bg-blue-700'
         >
-          {isLoading ? '処理中...' : '短縮URL生成'}
+          短縮URL生成
         </button>
       </form>
 

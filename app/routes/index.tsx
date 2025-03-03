@@ -2,6 +2,22 @@ import { createRoute } from 'honox/factory';
 import UrlForm from '../islands/url-form';
 
 export default createRoute((c) => {
+  // クエリパラメータから情報を取得
+  const error = c.req.query('error');
+  const url = c.req.query('url') || '';
+  const shortId = c.req.query('shortId');
+
+  // 現在のリクエストURLから基本URLを取得
+  const currentUrl = new URL(c.req.url);
+  const origin = currentUrl.origin;
+  const shortUrl = shortId ? `${origin}/${shortId}` : '';
+
+  const params = {
+    initialUrl: url,
+    initialError: error,
+    initialShortUrl: shortUrl,
+  };
+
   return c.render(
     <div className='max-w-2xl mx-auto py-8'>
       <div className='text-center mb-8'>
@@ -10,7 +26,7 @@ export default createRoute((c) => {
       </div>
 
       <div className='bg-white p-6 rounded-lg shadow-md'>
-        <UrlForm />
+        <UrlForm params={params} />
       </div>
 
       <div className='mt-8 bg-blue-50 p-6 rounded-lg border border-blue-200'>
