@@ -1,9 +1,12 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "u-shorten",
+  "main": "./dist/index.js",
   "compatibility_date": "2025-02-28",
   "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": "./dist",
+  "assets": {
+    "directory": "./dist"
+  },
   "kv_namespaces": [
     {
       "binding": "URL_STORE",
